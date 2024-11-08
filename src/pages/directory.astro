@@ -1,0 +1,93 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import DirectoryItemCard from "../components/DirectoryItemCard.astro";
+
+// For data collections, we use getCollection instead of getEntry
+const tagsCollection = await getCollection("tags");
+const allTags = tagsCollection[0].data; // Access the first (and only) entry's data
+
+// const directoryCollection = await getCollection('directory');
+const allDirectoryItems = await getCollection("directory");
+---
+
+<Layout title="Bumbulis">
+  <main class="text-gray-700 flex flex-1 flex-col items-center">
+    <div class="flex flex-1 flex-col bg-gray-100 px-4 sm:px-6 lg:px-8">
+      <div
+        class="flex flex-1 flex-col max-w-5xl w-full mx-auto bg-white shadow-xl rounded-lg mb-12 items-start"
+      >
+        <div id="tags-wrapper" class="flex flex-row flex-wrap p-4">
+          {
+            allTags.map((tag: string) => (
+              <div
+                class="tag-filter m-1 inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground cursor-pointer hover:bg-gray-100"
+                data-tag={tag}
+              >
+                {tag}
+              </div>
+            ))
+          }
+        </div>
+        <div
+          id="items-wrapper"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4"
+        >
+          {
+            allDirectoryItems.map((item: any) => (
+              <DirectoryItemCard
+                title={item.data.title}
+                description={item.data.description}
+                href={item.data.url}
+                tags={item.data.tags}
+              />
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  const selectedTags = new Set();
+
+  // Add click handlers to tags
+  document.querySelectorAll(".tag-filter").forEach((tag) => {
+    tag.addEventListener("click", () => {
+      const tagValue = tag.getAttribute("data-tag");
+      if (selectedTags.has(tagValue)) {
+        selectedTags.delete(tagValue);
+        tag.classList.remove("bg-blue-100", "border-blue-300");
+      } else {
+        selectedTags.add(tagValue);
+        tag.classList.add("bg-blue-100", "border-blue-300");
+      }
+      filterItems();
+    });
+  });
+
+  function filterItems() {
+    const items = document.querySelectorAll("#items-wrapper > *");
+
+    items.forEach((item) => {
+      // Assert that item is an HTMLElement
+      const element = item as HTMLElement;
+      const itemTags = JSON.parse(element.getAttribute("data-tags") || "[]");
+      if (
+        selectedTags.size === 0 ||
+        itemTags.some((tag: string) => selectedTags.has(tag))
+      ) {
+        element.style.display = "";
+      } else {
+        element.style.display = "none";
+      }
+    });
+  }
+</script>
+
+<style>
+  .tag-filter {
+    transition: all 0.2s ease-in-out;
+  }
+</style>

@@ -7,7 +7,7 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="bg-gray-100">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
@@ -16,8 +16,16 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body>
+	<body class="h-full flex flex-col flex-1">
+		<nav class="text-gray-500 flex text-lg flex-row justify-end w-full max-w-5xl mx-auto">
+			<a class="hover:text-gray-800 ml-2 my-8" href="/">About</a>
+			<a class="hover:text-gray-800 ml-2 my-8" href="/directory">Directory</a>
+			<a class="hover:text-gray-800 ml-2 my-8" href="/posts">Posts</a>
+		</nav>
 		<slot />
+		<footer class="text-gray-400 flex flex-row items-center justify-center">
+			<p>© {new Date().getFullYear()} Kristaps Bumbulis</p>
+		</footer>
 	</body>
 </html>
 <style is:global>
@@ -34,17 +42,6 @@ const { title } = Astro.props;
 	}
 	html {
 		font-family: system-ui, sans-serif;
-		background: #13151a;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
+		height: 100%;
 	}
 </style>

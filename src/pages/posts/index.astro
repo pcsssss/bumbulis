@@ -1,0 +1,21 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import PostPreviewCard from "../../components/PostPreviewCard.astro";
+
+const posts = await getCollection("post");
+---
+
+<Layout title="Bumbulis">
+  <main class="text-gray-700 flex flex-1 flex-col items-center">
+    <div class="flex flex-1 flex-col w-full bg-gray-100 px-4 sm:px-6 lg:px-8">
+      <div
+        class="flex flex-1 flex-col max-w-5xl w-full p-4 mx-auto bg-white shadow-xl rounded-lg mb-12 items-start"
+      >
+        {posts.map((post) => <PostPreviewCard post={post} />)}
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style></style>

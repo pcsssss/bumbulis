@@ -1,0 +1,77 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("post");
+
+export async function getStaticPaths() {
+  const posts = await getCollection("post");
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+
+const post = posts.find((post) => post.slug === slug);
+
+if (!post) {
+  return Astro.redirect('/404'); // Redirect to 404 page if post not found
+}
+
+const { Content } = await post.render();
+
+const formattedDate = new Date(post?.data.date)
+  .toLocaleDateString("lv-LV", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  })
+  .replace(/\//g, ".");
+---
+
+<Layout title={post?.data.title ?? "Bumbulis"}>
+  <main class="text-gray-700 flex flex-1 flex-col items-center">
+    <div class="flex flex-1 flex-col w-full bg-gray-100 px-4 sm:px-6 lg:px-8">
+      <div
+        class="flex flex-1 flex-col max-w-5xl w-full p-4 mx-auto bg-white shadow-xl rounded-lg mb-12 items-start"
+      >
+        <h1 class="text-2xl font-bold mt-4">{post?.data.title}</h1>
+        <div class="mb-8">{formattedDate}</div>
+        <div class="content-block">
+          <Content />
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+
+<style is:global>
+  p {}
+
+  .content-block :global(p) {
+    @apply py-2;
+  }
+
+  .content-block :global(h1) {
+    @apply text-2xl font-bold pt-6 pb-2;
+  }
+
+  .content-block :global(h2) {
+    @apply text-xl font-bold pt-4 pb-2;
+  }
+
+  .content-block :global(a) {
+    @apply text-blue-500;
+  }
+
+  .content-block :global(ol) {
+    @apply py-2;
+  }
+
+  .content-block :global(li) {
+    @apply py-1 list-decimal pl-2 ml-6;
+  }
+</style>

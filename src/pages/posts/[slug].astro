@@ -74,4 +74,11 @@ const formattedDate = new Date(post?.data.date)
   .content-block :global(li) {
     @apply py-1 list-decimal pl-2 ml-6;
   }
+
+  .content-block :global(pre) {
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
 </style>

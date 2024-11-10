@@ -6,19 +6,18 @@ How to adjust keyboard layout on osx using Ukelele
 "
 content: "This is the content of the post."
 slug: "custom-keyboard-layout-with-ukelele"
+preview_image: "/src/assets/post_images/keyboard.jpg"
 ---
 
 ![Keyboard image](../../assets/post_images/keyboard.jpg)
 
 ---
 
-## Intro
-
 [Ukelele](https://software.sil.org/ukelele/) is a free and open source software for creating and customizing keyboard layouts.
 
 Really useful for people who use non-standard keyboard layouts, have specific characters in their language or use not a full size keyboards.
 
-## How to create a custom layout from the existing one
+## Create a custom layout from the existing one
 
 1. Download Ukelele from [here](https://software.sil.org/ukelele/) and install it.
 2. Open Ukelele and go to `File > New from current input source` and select the layout template you downloaded.
@@ -28,7 +27,7 @@ Really useful for people who use non-standard keyboard layouts, have specific ch
 
 ![Ukulele usage image](../../assets/post_images/ukulele_usage.png)
 
-## My custom layout
+## Download my custom layout
 
 This is the layout I'm using for Latvian language and programming on a 65% keyboard. Extract and install the layout using the steps above.
 

@@ -13,7 +13,9 @@ const formattedDate = new Date(post.data.date).toLocaleDateString('en-GB', {
   year: 'numeric'
 }).replace(/\//g, '.');
 
-const postImage = post.data.preview_image || null;
+// const postImage = post.data.preview_image || null;
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/post_images/*.{jpeg,jpg,png,gif}');
+const imagePath = post.data.preview_image;
 ---
 
 <div class="w-full overflow-hidden">
@@ -22,15 +24,13 @@ const postImage = post.data.preview_image || null;
       {post.data.title}
     </h2>
     <span class="text-sm text-gray-400">{formattedDate}</span>
-    {
-      postImage && (
-        <img 
-          src={postImage} 
-          alt={post.data.title}
-          class="w-full h-auto object-cover my-4"
-        />
-      )
-    }
+    {imagePath && (
+      <Image 
+        src={images[imagePath]()}
+        alt={post.data.title}
+        class="w-full h-auto object-cover my-4"
+      />
+    )}
     <p class="text-gray-600 my-4">{post.data.intro}</p>
     <a href={`/posts/${post.slug}`} class="text-blue-400 hover:text-blue-600">Read more</a>
   </div>

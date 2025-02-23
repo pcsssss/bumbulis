@@ -11,9 +11,9 @@ import vpelns_logo from "../assets/portfolio/vpelns_logo.png";
 
 <Layout title="Bumbulis">
   <main class="text-white flex flex-1 flex-col items-center justify-center">
-    <div class="bg-gray-100 pb-12 px-4 sm:px-6 lg:px-8">
+    <div class="bg-gray-100 pb-12 px-4 print:px-0 print:pb-0 sm:px-6 lg:px-8">
       <div
-        class="max-w-5xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden"
+        class="max-w-5xl mx-auto bg-white print:shadow-none print:rounded-none shadow-xl rounded-lg overflow-hidden"
       >
         <div class="flex flex-col md:flex-row">
           {/* Left Column */}
@@ -64,41 +64,66 @@ import vpelns_logo from "../assets/portfolio/vpelns_logo.png";
               </div>
             </div>
             <div class="mt-8">
-              <h2 class="text-xl font-semibold mb-2">Skills</h2>
+              <h2 class="text-xl font-semibold mb-2">Languages</h2>
               <div class="flex flex-wrap gap-2">
+                <span class="bg-gray-700 px-2 py-1 rounded text-sm">
+                  Latvian - Native
+                </span>
+                <span class="bg-gray-700 px-2 py-1 rounded text-sm">
+                  English - C1
+                </span>
+                <span class="bg-gray-700 px-2 py-1 rounded text-sm">
+                  Russian - B2
+                </span>
+              </div>
+              <h2 class="text-xl font-semibold mb-2 mt-6">Skills</h2>
+              <div class="flex flex-col gap-2">
+                <div class="flex flex-wrap gap-2 border-b border-gray-700 pb-2">
                 {
                   [
                     "Python",
-                    "Django",
-                    "Node.js",
-                    "Next.js",
-                    "Astro",
-                    "S3",
-                    "Cloudflare",
-                    "Go",
+                    "JavaScript",
                     "TypeScript",
-                    "CSS/Tailwind",
-                    "PostgreSQL",
-                    "Docker",
-                    "Kubernetes",
-                    "Linux",
-                    "Git",
-                    "CI/CD",
-                    "RabbitMQ",
-                    "Redis",
+                    "Go",
                   ].map((skill) => (
                     <span class="bg-gray-700 px-2 py-1 rounded text-sm">
                       {skill}
                     </span>
                   ))
                 }
+                </div>
+                <div class="flex flex-wrap gap-2">
+                {
+                  [
+                    "Django",
+                    "Next.js",
+                    "Node.js",
+                    "S3",
+                    "Docker",
+                    "Redis",
+                    "Cloudflare",
+                    "CSS/Tailwind",
+                    "PostgreSQL",
+                    "Kubernetes",
+                    "Linux",
+                    "Git",
+                    "CI/CD",
+                    "RabbitMQ",
+                    "Astro",
+                  ].map((skill) => (
+                    <span class="bg-gray-700 px-2 py-1 rounded text-sm">
+                      {skill}
+                    </span>
+                  ))
+                }
+                </div>
               </div>
             </div>
           </div>
 
           {/* Right Column */}
-          <div class="w-full md:w-2/3 p-8">
-            <section class="mb-8">
+          <div class="w-full md:w-2/3 p-8 print:py-0">
+            <section class="mb-8 print:pt-12">
               <h2 class="text-2xl text-gray-700 font-bold mb-4">
                 Work Experience
               </h2>
@@ -177,21 +202,21 @@ import vpelns_logo from "../assets/portfolio/vpelns_logo.png";
                 </div>
               </div>
             </section>
-            <section>
-              <h2 class="text-2xl text-gray-700 font-bold mb-4">Portfolio</h2>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <section class="print:break-inside-avoid print:h-screen">
+              <h2 class="text-2xl text-gray-700 font-bold mb-4 print:pt-12">Portfolio</h2>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 print:flex-1 print:flex print:flex-col">
                 <PortfolioCard
                   href="https://pixelandmango.com"
                   title="pixelandmango.com"
                   description="Personal project. A full stack platform for photographers to deliver their work to clients including automated communication, image selection, paywalls and more. Backend/frontend built with next.js. Uploader binary built with Go. Custom Lightroom plugin written in LUA."
-                  tech="Go, Next.js, Cloudflare, PostgreSQL, Adobe Lightroom SDK - LUA"
+                  tech="Go, Next.js, Redis, Cloudflare, Docker, PostgreSQL, Adobe Lightroom SDK - LUA"
                   logo={pixelandmango_logo}
                 />
                 <PortfolioCard
                   href="https://vpelns.lv"
                   title="vpelns.lv"
                   description="A portfolio website for a local photographer."
-                  tech="Django, PostgreSQL"
+                  tech="Django, PostgreSQL, Docker"
                   logo={vpelns_logo}
                 />
               </div>

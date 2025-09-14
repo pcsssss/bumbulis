@@ -14,10 +14,12 @@ preview_image: "/src/assets/post_images/generative_screen.jpg"
 Using Nix and nix flakes to setup my workstation. Nix can be used both to
 declaratively define system configuration and to install applications.
 
-Nix can also manage per-project environment dependencies, which is really useful for
-development flow.
+Nix can also manage per-project environment dependencies, which is really useful
+for development flow.
 
-This guide will cover the initial setup and some tips on how to manage the system configuration for an osx device. Different operating systems will have different setup, so this guide will cover only osx.
+This guide will cover the initial setup and some tips on how to manage the
+system configuration for an osx device. Different operating systems
+will have different setup, so this guide will cover only osx.
 
 ## Install Nix multi-user
 
@@ -47,4 +49,5 @@ darwin-rebuild switch --flake ~/Projects/dotfiles
 
 ## Sample nix system configuration
 
-[This](https://github.com/pcsssss/dotfiles-sample) github repo contains an example nix configuration that can be used as a starting point.
+[This](https://github.com/pcsssss/dotfiles-sample) github repo contains an
+example nix configuration that can be used as a starting point.
